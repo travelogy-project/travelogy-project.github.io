@@ -10,12 +10,6 @@
         );
     }
 
-    document.addEventListener('readystatechange', event => {
-        if (event.target.readyState === "interactive") {  //or at "complete" if you want it to execute in the most last state of window.
-            ReLoadImages();
-        }
-    });
-    
     $(".carousel-inner .item:first-child").addClass("active");
     /* Mobile menu click then remove
     ==========================*/
@@ -167,5 +161,6 @@
         new WOW().init({
             mobile: false,
         });
+        ReLoadImages();
     });
 })(jQuery);
