@@ -1,6 +1,21 @@
 (function ($) {
 
     "use strict";
+  
+    function ReLoadImages(){
+        $('img[data-lazyload]').each( function(){
+            //* set the img src from data-src
+            $( this ).attr( 'src', $( this ).attr( 'data-lazyload' ) );
+            }
+        );
+    }
+
+    document.addEventListener('readystatechange', event => {
+        if (event.target.readyState === "interactive") {  //or at "complete" if you want it to execute in the most last state of window.
+            ReLoadImages();
+        }
+    });
+    
     $(".carousel-inner .item:first-child").addClass("active");
     /* Mobile menu click then remove
     ==========================*/
