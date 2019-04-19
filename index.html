@@ -71,15 +71,15 @@
             <div class="collapse navbar-collapse" id="primary_menu">
                 <ul class="nav navbar-nav mainmenu">
                     <li class="active"><a href="#home_page">Home</a></li>
-                    <li><a href="#about_page">Tentang</a></li>
-                    <li><a href="#how_to">How To</a></li>
-                    <li><a href="#features_page">Fitur</a></li>
-                    <li><a href="#gallery_page">Galeri</a></li>
-                    <li><a href="#price_page">Pricing</a></li>
-                    <li><a href="#contact_page">Kontak</a></li>
+                    <li><a href="#about_page" id="toolbar-about">Tentang</a></li>
+                    <li><a href="#how_to" id="toolbar-how-to">How To</a></li>
+                    <li><a href="#features_page" id="toolbar-feature">Fitur</a></li>
+                    <li><a href="#gallery_page" id="toolbar-gallery">Galeri</a></li>
+                    <li><a href="#price_page" id="toolbar-pricing">Pricing</a></li>
+                    <li><a href="#contact_page" id="toolbar-contacts">Kontak</a></li>
                 </ul>
                 <div class="right-button hidden-xs">
-                    <a href="#download-area" class="download-button">Get It Now</a>
+                    <a href="#download-area" id="toolbar-download">Get It Now</a>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
                         <p>Travelogy akan membantu perencanaan perjalanan Anda, dengan berbagai fitur unggulan yang menarik.</p>
                     </div>
                     <div class="space-20"></div>
-                    <a href="#download-area" class="bttn-white wow fadeInUp download-button" data-wow-delay="0.8s"><i class="lnr lnr-download"></i>Download App</a>
+                    <a href="#download-area" class="bttn-white wow fadeInUp download-button" data-wow-delay="0.8s" id="download-button"><i class="lnr lnr-download"></i>Download App</a>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
                             <p>Kami akan membantu Anda untuk mengeksplorasi berbagai tempat baru, mengunjungi berbagai keajaiban, dan mendapatkan pengalaman tak terlupakan.</p>
                         </div>
                         <div class="space-50"></div>
-                        <a href="#features_page" class="bttn-default wow fadeInUp" data-wow-delay="0.8s">Features</a>
+                        <a href="#features_page" class="bttn-default wow fadeInUp" data-wow-delay="0.8s" id="feature-button">Features</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6">
@@ -320,8 +320,8 @@
                     <div class="space-20"></div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam possimus eaque magnam eum praesentium unde.</p>
                     <div class="space-60"></div>
-                    <a href="#" class="bttn-white sq"><img src="images/apple-icon.png" alt="apple icon"> Apple Store</a>
-                    <a href="#" class="bttn-white sq"><img src="images/play-store-icon.png" alt="Play Store Icon"> Play Store</a>
+                    <a href="#" class="bttn-white sq" id="download-ios"><img src="images/apple-icon.png" alt="apple icon"> Apple Store</a>
+                    <a href="#" class="bttn-white sq" id="download-android"><img src="images/play-store-icon.png" alt="Play Store Icon"> Play Store</a>
                 </div>
             </div>
         </div>
@@ -359,7 +359,7 @@
                             <sup>Rp</sup> <span class="rate">0k</span> <small>/Month</small>
                         </div>
                         <div class="price-footer">
-                            <a href="#" class="bttn-white">Purchase</a>
+                            <a href="#" class="bttn-white" id="purchase-free">Purchase</a>
                         </div>
                     </div>
                     <div class="space-30 hidden visible-xs"></div>
@@ -383,7 +383,7 @@
                             <sup>Rp</sup> <span class="rate">15k</span> <small>/Month</small>
                         </div>
                         <div class="price-footer">
-                            <a href="#" class="bttn-white">Purchase</a>
+                            <a href="#" class="bttn-white" id="purchase-premium">Purchase</a>
                         </div>
                     </div>
                     <div class="space-30 hidden visible-xs"></div>
@@ -407,7 +407,7 @@
                             <sup>Rp</sup> <span class="rate">400k</span> <small>/Month</small>
                         </div>
                         <div class="price-footer">
-                            <a href="#" class="bttn-white">Purchase</a>
+                            <a href="#" class="bttn-white" id="purchase-business">Purchase</a>
                         </div>
                     </div>
                 </div>
@@ -425,7 +425,7 @@
                         <div class="space-20"></div>
                         <form id="mc-form">
                             <input type="email" class="control" placeholder="Enter your email" required="required" id="mc-email">
-                            <button class="bttn-white active" type="submit"><span class="lnr lnr-location"></span> Subscribe</button>
+                            <button class="bttn-white active" type="submit" id="subscribe-button"><span class="lnr lnr-location"></span> Subscribe</button>
                             <label class="mt10" for="mc-email"></label>
                         </form>
                     </div>
