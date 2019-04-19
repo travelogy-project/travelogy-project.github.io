@@ -30,7 +30,7 @@ For e.g. 'http://blahblah.us1.list-manage.com/subscribe/post-json?u=5afsdhfuhdsi
 
     $.ajaxChimp = {
         responses: {
-            'We have sent you a confirmation email'                                             : 0,
+            'We have recorded your email'                                             : 0,
             'Please enter a value'                                                              : 1,
             'An email address must contain a single @'                                          : 2,
             'The domain portion of the email address is invalid (the portion after the @: )'    : 3,
@@ -65,32 +65,13 @@ For e.g. 'http://blahblah.us1.list-manage.com/subscribe/post-json?u=5afsdhfuhdsi
                 var msg;
                 function successCallback(resp) {
                     if (resp.result === 'success') {
-                        msg = 'We have sent you a confirmation email';
+                        msg = resp.msg;
                         label.removeClass('error').addClass('valid');
                         email.removeClass('error').addClass('valid');
                     } else {
-                        email.removeClass('valid').addClass('error');
-                        label.removeClass('valid').addClass('error');
-                        var index = -1;
-                        try {
-                            var parts = resp.msg.split(' - ', 2);
-                            if (parts[1] === undefined) {
-                                msg = resp.msg;
-                            } else {
-                                var i = parseInt(parts[0], 10);
-                                if (i.toString() === parts[0]) {
-                                    index = parts[0];
-                                    msg = parts[1];
-                                } else {
-                                    index = -1;
-                                    msg = resp.msg;
-                                }
-                            }
-                        }
-                        catch (e) {
-                            index = -1;
-                            msg = resp.msg;
-                        }
+                        msg = resp.msg;
+                        label.removeClass('error').addClass('valid');
+                        email.removeClass('error').addClass('valid');
                     }
 
                     // Translate and display message
@@ -111,21 +92,55 @@ For e.g. 'http://blahblah.us1.list-manage.com/subscribe/post-json?u=5afsdhfuhdsi
                     }
                 }
 
+                function validateEmail(email) {
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(String(email).toLowerCase());
+                }
+
                 var data = {};
                 var dataArray = form.serializeArray();
                 $.each(dataArray, function (index, item) {
                     data[item.name] = item.value;
                 });
 
-                $.ajax({
-                    url: url,
-                    data: data,
-                    success: successCallback,
-                    dataType: 'jsonp',
-                    error: function (resp, text) {
-                        console.log('mailchimp ajax submit error: ' + text);
-                    }
-                });
+                // $.ajax({
+                //     url: url,
+                //     data: data,
+                //     success: successCallback,
+                //     dataType: 'jsonp',
+                //     error: function (resp, text) {
+                //         console.log('mailchimp ajax submit error: ' + text);
+                //     }
+                // });
+
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date+' '+time;
+                
+                
+                var user_email = email[0].value;
+
+                if (validateEmail(user_email)){
+                    var updates = {};
+                    updates['/email/' + dateTime] = user_email; 
+                    firebase.database().ref().update(updates, function(error){
+                        var response = {}
+                        if (error) {
+                            response.result = 'error';
+                            response.msg = 'error in submitting email';
+                        } else {
+                            response.result = 'success';
+                            response.msg = 'Email submitted';
+                        }
+                        successCallback(response);
+                    })
+                } else {
+                    var response = {};
+                    response.result = 'error';
+                    response.msg = 'Invalid email';
+                    successCallback(response);
+                }
 
                 // Translate and display submit message
                 var submitMsg = 'Submitting...';
